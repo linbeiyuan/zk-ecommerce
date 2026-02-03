@@ -13,6 +13,9 @@ export default defineConfig(({mode}) => {
   console.log('VITE_APP_SERVICE_URL', env.VITE_APP_SERVICE_URL)
   return {
     //base: 'mxg',
+    build: {
+      target: 'esnext', // 支持 top-level await
+    },
     // 开发环境有效（生产环境无效），参考：https://cn.vitejs.dev/config/server-options.html
     server: {
       port: 8888, // 端口号
