@@ -1,0 +1,82 @@
+# CI 持续集成工作流
+name: CI - 持续集成
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 后端测试
+  backend-test:
+    runs-on: ubuntu-latest
+    name: 后端代码检查
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+
+    - name: 设置 Python 环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: 安装依赖
+      run: |
+        cd pyzkds
+        pip install -r requirements.txt
+
+    - name: 代码语法检查
+      run: |
+        pip install flake8
+        cd pyzkds
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+  # 前端 Admin 构建测试
+  admin-build:
+    runs-on: ubuntu-latest
+    name: Admin 前端构建
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+
+    - name: 设置 Node.js 环境
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: 安装依赖
+      run: |
+        cd admin/admin
+        npm install
+
+    - name: 构建项目
+      run: |
+        cd admin/admin
+        npm run build
+
+  # 前端 Front 构建测试
+  front-build:
+    runs-on: ubuntu-latest
+    name: Front 前端构建
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+
+    - name: 设置 Node.js 环境
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: 安装依赖
+      run: |
+        cd front/front
+        npm install
+
+    - name: 构建项目
+      run: |
+        cd front/front
+        npm run build

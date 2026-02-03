@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # 后端服务
+  backend:
+    build: ./pyzkds
+    container_name: zk-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pyzkds:/app
+    environment:
+      - DEBUG=1
+    networks:
+      - zk-network
+
+  # 管理后台前端
+  admin:
+    build: ./admin/admin
+    container_name: zk-admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - zk-network
+
+  # 用户前台
+  front:
+    build: ./front/front
+    container_name: zk-front
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    networks:
+      - zk-network
+
+networks:
+  zk-network:
+    driver: bridge

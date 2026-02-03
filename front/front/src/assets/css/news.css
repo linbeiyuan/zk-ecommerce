@@ -1,0 +1,596 @@
+/* 去掉所有标签的默认内外边距 */
+*{
+	/* 外边距为0 */
+	margin: 0;
+	/* 内边距为0 */
+	padding: 0;
+}
+/* 去除列表的默认样式 */
+li{
+	list-style: none;
+}
+/* 去掉超链接a标签的默认下划线 */
+a{
+	text-decoration: none;
+}
+/* 导航栏 */
+/* 导航栏上侧 */
+.header-top{
+	/* 设置背景颜色 */
+	background: #FFFFFF;
+	/* 长度设置为100% */
+	width: 100%;
+	/* 设置高度 */
+	height: 80px;
+}
+/* 顶部内容区 */
+.header-top-f{
+	/* 设置长度 */
+	width: 1200px;
+	/* 居中 */
+	margin: auto;
+}
+.header-top-f img{
+	/* 左浮动 靠左对齐 */
+	float: left;
+	/* 设置高度 */
+	height: 60px;
+	/* 15px的上侧外边距 */
+	margin-top: 9px;
+}
+.search{
+	/* 右浮动 靠右对齐 */
+	float: right;
+	/* 设置高度为30px */
+	height: 30px;
+	/* 25px的上侧外边距 */
+	margin-top: 25px;
+	/* 设置1px的实线边框 颜色为下侧色值 */
+	border: 1px solid #b20000;
+}
+/* 搜索框的input */
+.search input{
+	/* 去除默认效果 */
+	outline: none;
+	/* 左浮动 靠左对齐 */
+	float: left;
+	/* 设置长度 */
+	width: 200px;
+	/* 设置高度 */
+	height: 30px;
+	/* 去除默认边框 */
+	border: none;
+	/* 设置5px的左侧内边距 */
+	padding-left: 5px;
+	
+}
+/* 搜索的按钮 */
+.search button{
+	/* 鼠标移入效果设置为触手 */
+	cursor: pointer;
+	/* 左浮动 靠左对齐 */
+	float: left;
+	/* 设置长度 */
+	width: 60px;
+	/* 设置高度 */
+	height: 30px;
+	/* 设置按钮颜色 */
+	color: #FFFFFF;
+	/* 设置按钮背景 */
+	background: #b20000;
+	/* 去除默认边框 */
+	border: none;
+}
+/* 导航区域 */
+.header{
+	/* 背景颜色 */
+	background: #b20000;
+	/* 设置高度 */
+	height: 50px;
+	/* 设置行高 */
+	line-height: 50px;
+}
+.header ul{
+	/* 长度设置 */
+	width: 1200px;
+	/* 居中显示 */
+	margin: auto;
+}
+/* 导航内的无序列表 */
+.header ul li{
+	/* 设置为行内块级元素 */
+	display: inline-block;
+}
+/* 导航栏内的a标签 */
+.header ul li a{
+	/* 设置为块级元素 */
+	display: block;
+	/* 设置上下内边距为0 左右内边距为40px */
+	padding: 0 40px;
+	color: #FFFFFF;
+}
+/* 设置class为active 下的a */
+.header ul .active a{
+	/* 设置背景 */
+	background: #8b0000;
+}
+/* 鼠标移入效果 */
+.header ul li a:hover{
+	/* 设置背景 */
+	background: #8b0000;
+}
+/* 轮播图 */
+.swiper {
+	/* 相对定位 */
+	position: relative;
+	/* 设置长度 */
+	width: 100%;
+	/* 设置高度 */
+	height: 400px;
+	/* 上外边距0 左右居中 下外边距为20 */
+	margin: 0 auto;
+	/* 超出隐藏不显示 */
+	overflow: hidden;
+}
+
+.wrap {
+	/* 相对定位 */
+	position: relative;
+	/* 设置长度 */
+	width: 100%;
+	/* 设置高度 */
+	height: 100%;
+	/* 居中显示 */
+	margin: auto;
+	/* 超出隐藏不显示 */
+	overflow: hidden;
+}
+
+.warp ul {
+	/* 绝对定位 */
+	position: absolute;
+}
+
+.wrap ul li {
+	/* 设置长度 */
+	width: 100%;
+	/* 设置高度 */
+	height: 100%;
+}
+
+.wrap ul li img {
+	/* 设置图片长度 */
+	width: 100%;
+	/* 设置图片高度 */
+	height: 400px;
+	/* 图片超出大小自动延展 防止压缩 */
+	object-fit: cover;
+	/* 设置3px的圆形弧度 */
+	border-radius: 3px;
+}
+/* 底部下标 */
+.wrap ol {
+	/* 绝对定位 */
+	position: absolute;
+	/* 靠.wrap右侧5% */
+	right: 5%;
+	/* 靠.wrap底部20px */
+	bottom: 20px;
+}
+
+.wrap ol li {
+	/* 去除默认属性 */
+	list-style: none;
+	/* 设置高度 */
+	height: 8px;
+	/* 设置长度 */
+	width: 50px;
+	/* 边框 */
+	border: 1px solid #FFF;
+	/* 左侧外边距为12px */
+	margin-left: 12px;
+	/* 左浮动 */
+	float: left;
+	/* 鼠标移上去 */
+	cursor: pointer;
+	/* 字体为0 隐藏文字 */
+	font-size: 0px;
+}
+
+.wrap ol .on {
+	/* 选中的背景 */
+	background: #b20000;
+}
+/* 学校概括 */
+.home-about{
+	/* 弹性布局 */
+	display: flex;
+	/* 两端对齐 */
+	justify-content: space-between;
+	/* 设置长度 */
+	width: 1180px;
+	/* 居中显示 */
+	margin: 30px auto 40px auto;
+	/* 设置内边距 */
+	padding: 10px;
+	box-shadow: 0px 10px 10px 8px #CCCCCC;
+}
+.home-about img{
+	/* 设置长度 */
+	width: 550px;
+	/* 设置高度 */
+	height: 350px;
+	/* 防止图片压缩 */
+	object-fit: cover;
+}
+.home-about-text{
+	/* 设置长度 */
+	width: 590px;
+	/* 上下左右内边距为20 */
+	padding: 20px;
+}
+.home-about-text h4{
+	/* 设置字体 */
+	font-size: 24px;
+	/* 设置颜色 */
+	color: #333333;
+	/* 字体粗细 */
+	font-weight: normal;
+	/* 文字间距 */
+	letter-spacing: 2px;
+	/* 下外边距为15px */
+	margin-bottom: 15px;
+	/* 左侧边框 */
+	border-left: 8px solid #333333;
+	/* 左侧内边距 */
+	padding-left: 10px;
+}
+.home-about-text p{
+	/* 设置行高 */
+	line-height: 1.8;
+}
+.home-about-text a{
+	/* 设置成块级元素 单独一行显示 */
+	display: block;
+	/* 设置背景颜色 */
+	background: #333333;
+	/* 字体大小 */
+	font-size: 14px;
+	/* 字体颜色 */
+	color: #FFFFFF;
+	/* 设置长度 */
+	width: 100px;
+	/* 设置高度 */
+	height: 40px;
+	/* 设置行高 */
+	line-height: 40px;
+	/* 文字居中 */
+	text-align: center;
+	/* 上侧外边距为10 */
+	margin-top: 20px;
+	/* 圆弧为6px */
+	border-radius: 6px;
+}
+/* 新闻 */
+/* 文章列表 */
+.text {
+	/* 弹性布局 */
+	display: flex;
+	/* 可换行 */
+	flex-wrap: wrap;
+	/* 两端对齐 */
+	justify-content: space-between;
+	/* 设置长度 */
+	width: 1500px;
+	/* 上下外边距50 左右居中 */
+	margin: 0 auto;
+}
+
+/* 文章 */
+.text-list {
+	/* 设置长度 */
+	width: 50%;
+}
+
+.text .text-list .list-img {
+	/* 设置长度 */
+	width: 100%;
+}
+
+.text .text-list .list-img img {
+	/* 设置长度 */
+	width: 100%;
+	/* 设置行高 */
+	height: 220px;
+	/* 防止图片变形 */
+	object-fit: cover;
+}
+
+.text .text-list .list-text {
+	/* 设置长度 */
+	width: 100%;
+}
+
+.text .text-list .list-text h3 {
+	/* 上下外边距为10 左右为0 */
+	margin: 15px 0 10px 0;
+	/* 设置字体颜色 */
+	color: #333;
+	/* 设置字体大小 */
+	font-size: 18px;
+}
+/* 时间 */
+.text .text-list .time{
+	/* flex布局 */
+	display: flex;
+	/* 垂直居中 */
+	align-items: center;
+	/* 字体大小 */
+	font-size: 13px;
+	/* 字体颜色 */
+	color: #888888;
+	/* 下次外边距 */
+	margin-bottom: 10px;
+}
+/* 时间图标 */
+.text .text-list .time img{
+	/* 图片长度 */
+	width: 16px;
+	/* 图片高度 */
+	height: 16px;
+	/* 右侧外边距 */
+	margin-right: 10px;
+}
+.text .text-list .list-text p {
+	/* 设置行高 */
+	line-height: 1.6;
+	/* 设置字体大小 */
+	font-size: 14px;
+	/* 设置字体颜色 */
+	color: #666;
+	/* 设置行高 */
+	line-height: 24px;
+}
+/* 栏目标题 */
+.title{
+	/* 设置长度 */
+	width: 1200px;
+	/* 上下外边距30px 左右居中 */
+	margin: 30px auto;
+}
+.title h3{
+	/* 左侧5px的边框 */
+	border-left: 5px solid #000000;
+	/* 左侧内边距为10px */
+	padding-left: 10px;
+	/* 设置字体大小 */
+	font-size: 20px;
+	/* 设置高度 */
+	height: 25px;
+	/* 设置行高 */
+	line-height: 25px;
+}
+/* 校园风采 */
+.mein{
+	/* 弹性布局 */
+	display: flex;
+	/* 子元素横向两端对齐 */
+	justify-content: space-between;
+	/* 设置长度 */
+	width: 1200px;
+	/* 横向居中 */
+	margin: auto;
+}
+.mein img{
+	/* 设置长度 */
+	width: 23%;
+	/* 设置高度 */
+	height: 180px;
+	/* 防止图片变形 */
+	object-fit: cover;
+}
+/* 底部 */
+.footer{
+	/* 设置长度 */
+	width: 100%;
+	/* 上下内边距10 左右0 */
+	padding: 10px 0;
+	/* 上侧外边距40px */
+	margin-top: 40px;
+	/* 字体颜色 */
+	color: #FFF;
+	/* 背景颜色 */
+	background: #333;
+	/* 文字居中 */
+	text-align: center;
+	/* 字体大小 */
+	font-size: 14px;
+}
+/* 学校概况 */
+.about{
+	/* 设置长度 */
+	width: 1160px;
+	/* 左右居中显示 */
+	margin: auto;
+	/* 上右下左内边距为20px */
+	padding: 20px;
+	/* 设置阴影 */
+	box-shadow: 0 10px 10px 10px #CCCCCC;
+	/* 设置div圆弧 */
+	border-radius: 10px;
+}
+/* 学校概况下的图片 */
+.about img{
+	/* 设置成块级元素 */
+	display: block;
+	/* 最大长度不超过100% */
+	max-width: 100%;
+	/* 上下外边距为5px 左右居中显示 */
+	margin: 5px auto;
+}
+/* 学校概况下的p标签样式 */
+.about p{
+	/* 设置行高 */
+	line-height: 1.8;
+	/* 首行缩进2个字段 */
+	text-indent: 2em;
+	/* 设置文字大小 */
+	font-size: 16px;
+	/* 上下外边距为5px 左右局中居中显示 */
+	margin: 5px auto;
+	/* 设置文字颜色 */
+	color: #666;
+}
+/* 院系设置 */
+.faculty{
+	/* flex弹性布局 */
+	display: flex;
+	/* 换行 */
+	flex-wrap: wrap;
+	/* 两端对齐 */
+	justify-content: space-between;
+	/* 设置长度 */
+	width: 1200px;
+	/* 左右居中对齐 */
+	margin: auto;
+}
+.faculty-list{
+	/* 设置长度 */
+	width: 580px;
+	/* 下侧外边距为20px */
+	margin-bottom: 20px;
+	/* 设置阴影 */
+	box-shadow: 0 10px 10px 10px #CCCCCC;
+	/* 设置div圆弧 */
+	border-radius: 6px;
+	/* 超出范围隐藏 */
+	overflow: hidden;
+}
+/* 标题 */
+.faculty-list-title{
+	/* 设置长度 */
+	width: 100%;
+	/* 设置高度 */
+	height: 50px;
+	/* 设置行高 */
+	line-height: 50px;
+	/* 背景图片 */
+	background: url(../img/bg17.png) no-repeat;
+	/* 图片位置 */
+	background-position: top right;
+}
+.faculty-list-title h3{
+	/* 字体颜色 */
+	color: #FFF;
+	/* 左侧外边距为20px */
+	margin-left: 20px;
+	/* 字体间距 */
+	letter-spacing: 10px;
+}
+.faculty-list ul{
+	/* 上下内边距为20px 左右为0 */
+	padding: 20px 0;
+}
+.faculty-list ul li{
+	/* 设置成行内块级元素 */
+	display: inline-block;
+	/* 设置长度 */
+	width: 49%;
+	/* 上下外边距为10px 左右为0 */
+	margin: 10px 0;
+	/* 文字居中 */
+	text-align: center;
+}
+/* 前缀图标 */
+.faculty-list ul li:before {
+	/* 设置默认内容 */
+    content: "";
+	/* 设置成行内块级元素 可设置大小 可同行显示 */
+	display: inline-block;
+	/* 设置长度 */
+	width: 10px;
+	/* 设置高度 */
+	height: 2px;
+	/* 上外边距 0 右10px 下4px 0 */
+	margin: 0 10px 4px 0;
+	/* 设置背景颜色 */
+    background: #94070a;
+}
+/* 学院资讯 */
+.news .text-list{
+	/* 上下外边距为15px */
+	margin: 15px 0;
+}
+/* 图片集 */
+.feng{
+	/* 弹性布局 */
+	display: flex;
+	/* 子元素横向两端对齐 */
+	justify-content: space-between;
+	/* 设置长度 */
+	width: 1200px;
+	/* 上下外边距20px 左右居中 */
+	margin: 20px auto;
+}
+/* 左侧大图 */
+.feng-left{
+	/* 相对定位 */
+	position: relative;
+	/* 设置长度 */
+	width: 300px;
+	/* 设置高度 */
+	height: 460px;
+}
+.feng-right{
+	/* 相对定位 */
+	position: relative;
+	/* 设置长度 */
+	width: 880px;
+	/* 设置高度 */
+	height: 460px;
+}
+.feng-right ul{
+	/* 弹性布局 */
+	display: flex;
+	/* 换行处理 */
+	flex-wrap: wrap;
+	/* 子元素横向两端对齐 */
+	justify-content: space-between;
+}
+.feng-right ul li {
+	list-style: none;
+	/* 相对定位 */
+	position: relative;
+	/* 设置长度 */
+	width: 280px;
+	/* 设置高度 */
+	height: 220px;
+	/* 下侧外边距为20px */
+	margin-bottom: 20px;
+}
+.feng img{
+	display: block;
+	/* 设置长度 */
+	width: 100%;
+	/* 设置高度 */
+	height: 100%;
+	/* 防止图片变形 */
+	object-fit: cover;
+}
+.feng p{
+	/* 绝对定位 */
+	position: absolute;
+	/* 父级底部的0位置 */
+	bottom: 0;
+	/* 父级左侧的0位置 */
+	left: 0;
+	font-size: 16px;
+	/* 设置长度 */
+	width: 92%;
+	/* 上下左右的内边距为父级的4% */
+	padding: 4%;
+	/* 设置字体颜色 */
+	color: #FFFFFF;
+	/* 设置背景颜色 */
+	background-color: rgba(0,0,0,0.4);
+}

@@ -1,0 +1,806 @@
+/**
+ * 全局样式文件 - 核心设计系统
+ * 包含：CSS变量、Element Plus覆盖、通用组件样式
+ * 注意：首页专用样式在 front-layout.css 中
+ */
+
+/* ========================================
+   CSS 变量定义 - 美食主题
+   ======================================== */
+:root {
+  /* 主色调 - 美食橙红色系 */
+  --primary: #ff6b35;
+  --primary-light: #ff8c5a;
+  --primary-dark: #e55a2b;
+  --secondary: #f7931e;
+  --accent: #ffa500;
+
+  /* 渐变 - 美食温暖渐变 */
+  --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  --gradient-secondary: linear-gradient(135deg, #ffa500 0%, #ff6b35 100%);
+  --gradient-accent: linear-gradient(135deg, #ff8c5a 0%, #ffd700 100%);
+
+  /* 功能色 */
+  --success: #27ae60;
+  --warning: #f39c12;
+  --danger: #e74c3c;
+  --info: #3498db;
+
+  /* 文字颜色 */
+  --text-primary: #2c3e50;
+  --text-secondary: #34495e;
+  --text-muted: #95a5a6;
+
+  /* 背景色 - 温暖米色系 */
+  --bg-primary: #fef9f3;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.95);
+
+  /* 边框 */
+  --border: #ffe4c4;
+  --border-light: #fff5ee;
+  --border-active: rgba(255, 107, 53, 0.3);
+
+  /* 圆角 */
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* 阴影 - 美食温暖阴影 */
+  --shadow: 0 4px 20px rgba(255, 107, 53, 0.08);
+  --shadow-md: 0 8px 30px rgba(255, 107, 53, 0.12);
+  --shadow-lg: 0 15px 50px rgba(255, 107, 53, 0.15);
+  --shadow-glow: 0 0 30px rgba(255, 107, 53, 0.2);
+
+  /* 动画 */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.4s ease;
+  --transition-slow: 0.6s ease;
+
+  /* Element Plus 变量覆盖 */
+  --el-color-primary: #ff6b35;
+  --el-color-success: #27ae60;
+  --el-color-warning: #f39c12;
+  --el-color-danger: #e74c3c;
+  --el-color-info: #3498db;
+}
+
+/* ========================================
+   全局基础样式
+   ======================================== */
+body {
+  background: linear-gradient(135deg, #fef9f3 0%, #fff5ee 50%, #ffe4c4 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ========================================
+   动画关键帧
+   ======================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ========================================
+   Element Plus - 按钮样式
+   ======================================== */
+.el-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  height: 42px !important;
+  border-radius: var(--radius) !important;
+  transition: all var(--transition-fast);
+  gap: 8px !important;
+}
+
+.el-button--primary {
+  background: var(--gradient-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.el-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.el-button--success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.el-button--danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.el-button--warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.el-button--default {
+  background: #ffffff !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.el-button--default:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.el-button.is-disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* ========================================
+   Element Plus - 输入框样式
+   ======================================== */
+.el-input__wrapper {
+  background: #ffffff !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  border: 1px solid var(--border) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.el-input__wrapper:hover {
+  border-color: var(--border-active) !important;
+}
+
+.el-input__wrapper.is-focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
+}
+
+.el-input__inner {
+  color: var(--text-primary) !important;
+}
+
+.el-input__inner::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* ========================================
+   Element Plus - 下拉框样式
+   ======================================== */
+.el-select-dropdown {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.el-select-dropdown__item:hover {
+  background: rgba(102, 126, 234, 0.08) !important;
+}
+
+.el-select-dropdown__item.selected {
+  background: rgba(102, 126, 234, 0.12) !important;
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   Element Plus - 表格样式
+   ======================================== */
+.el-table {
+  background: #ffffff !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow);
+}
+
+.el-table th.el-table__cell {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  padding: 16px 12px !important;
+}
+
+.el-table td.el-table__cell {
+  background: #ffffff !important;
+  padding: 14px 12px !important;
+  color: var(--text-secondary) !important;
+}
+
+.el-table tr:hover > td {
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* ========================================
+   Element Plus - 卡片样式
+   ======================================== */
+.el-card {
+  background: #ffffff !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  transition: all var(--transition-normal);
+}
+
+.el-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+.el-card__header {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 16px 20px !important;
+  font-weight: 600 !important;
+}
+
+.el-card__body {
+  padding: 24px !important;
+}
+
+/* ========================================
+   Element Plus - 弹窗样式
+   ======================================== */
+.el-dialog {
+  background: #ffffff !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  animation: scaleIn 0.3s ease-out;
+  box-shadow: var(--shadow-lg);
+}
+
+.el-dialog__header {
+  padding: 20px 24px !important;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.el-dialog__title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+}
+
+.el-dialog__body {
+  padding: 24px !important;
+}
+
+.el-dialog__footer {
+  padding: 16px 24px !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.el-overlay {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* ========================================
+   Element Plus - 表单样式
+   ======================================== */
+.el-form-item__label {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+}
+
+.el-form-item {
+  margin-bottom: 24px !important;
+}
+
+/* ========================================
+   Element Plus - 标签页样式
+   ======================================== */
+.el-tabs--border-card {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.el-tabs--border-card > .el-tabs__header {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%) !important;
+}
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+  background: #ffffff !important;
+  color: var(--primary) !important;
+  border-bottom: 3px solid var(--primary) !important;
+}
+
+/* ========================================
+   Element Plus - 标签样式
+   ======================================== */
+.el-tag {
+  border-radius: var(--radius-full) !important;
+  padding: 6px 14px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border: none !important;
+}
+
+.el-tag--danger { background: rgba(239, 68, 68, 0.2) !important; color: #f87171 !important; }
+.el-tag--success { background: rgba(16, 185, 129, 0.2) !important; color: #34d399 !important; }
+.el-tag--warning { background: rgba(245, 158, 11, 0.2) !important; color: #fbbf24 !important; }
+.el-tag--info { background: rgba(99, 102, 241, 0.2) !important; color: #818cf8 !important; }
+
+/* ========================================
+   Element Plus - 分页样式
+   ======================================== */
+.el-pagination {
+  margin-top: 24px !important;
+  justify-content: flex-end !important;
+}
+
+.el-pagination button,
+.el-pagination .el-pager li {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text-secondary) !important;
+}
+
+.el-pagination .el-pager li.is-active {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* ========================================
+   Element Plus - 消息提示
+   ======================================== */
+.el-message {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.el-message--success { border-left: 4px solid var(--success) !important; }
+.el-message--warning { border-left: 4px solid var(--warning) !important; }
+.el-message--error { border-left: 4px solid var(--danger) !important; }
+.el-message--info { border-left: 4px solid var(--info) !important; }
+
+/* ========================================
+   Element Plus - 通知
+   ======================================== */
+.el-notification {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.el-notification__title {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.el-notification__content {
+  color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   通用搜索表单
+   ======================================== */
+.demo-form-inline {
+  padding: 20px !important;
+  background: #ffffff !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border);
+  margin-bottom: 20px !important;
+  box-shadow: var(--shadow);
+}
+
+/* ========================================
+   个人中心表单
+   ======================================== */
+.addEdit-block {
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  padding: 32px !important;
+  background: #ffffff !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow) !important;
+}
+
+/* ========================================
+   购物车样式
+   ======================================== */
+.cart {
+  padding: 24px;
+}
+
+.cart h1 {
+  font-size: 24px;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow);
+}
+
+.cart-item:hover {
+  transform: translateX(10px);
+  border-color: var(--border-active);
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.item-details h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.item-price {
+  font-size: 22px;
+  font-weight: 700;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cart-total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+  margin-top: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.cart-total #total {
+  font-size: 32px;
+  font-weight: 700;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 12px;
+}
+
+/* ========================================
+   聊天/问答样式
+   ======================================== */
+.chat-content {
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  min-height: 450px;
+}
+
+.left-content {
+  float: left;
+  padding: 14px 20px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  margin-bottom: 16px;
+  max-width: 70%;
+  color: var(--text-secondary);
+}
+
+.right-content {
+  float: right;
+  padding: 14px 20px;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+  margin-bottom: 16px;
+  max-width: 70%;
+}
+
+.clear-float {
+  clear: both;
+}
+
+/* ========================================
+   错误页面样式
+   ======================================== */
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 50px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.error-container .error-img {
+  width: 350px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.error-container .error-title {
+  font-size: 28px;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.error-container .error-msg {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* ========================================
+   导航栏样式 - 美食主题（全局）
+   ======================================== */
+nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 245, 238, 0.98) 100%) !important;
+  border-bottom: 2px solid #ffe4c4 !important;
+  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* 导航栏主容器 */
+nav > div {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 12px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+/* Logo 容器 - 顶部 */
+nav > div > div:first-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+/* 菜单和按钮容器 - 同一行 */
+nav > div > div:nth-child(2),
+nav > div > div:nth-child(3) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+/* 菜单项容器 */
+nav > div > div:nth-child(2) > div > div,
+nav > div > div:nth-child(3) > div > div {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+}
+
+/* 按钮容器 */
+nav > div > div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+/* 菜单链接和按钮 */
+nav a,
+nav button {
+  color: #2c3e50 !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  white-space: nowrap !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin: 0 12px !important;
+}
+
+nav a:hover,
+nav button:hover {
+  color: #ff6b35 !important;
+  background: rgba(255, 107, 53, 0.08) !important;
+}
+
+/* 按钮样式 */
+nav button {
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 登录按钮 */
+nav button:first-of-type {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%) !important;
+  color: white !important;
+}
+
+nav button:first-of-type:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3) !important;
+}
+
+/* 其他按钮 */
+nav button:not(:first-of-type) {
+  background: white !important;
+  color: #ff6b35 !important;
+  border: 2px solid #ff6b35 !important;
+}
+
+nav button:not(:first-of-type):hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3) !important;
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark), var(--secondary));
+}
+
+/* ========================================
+   加载状态
+   ======================================== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: rotate 1s linear infinite;
+}
+
+/* ========================================
+   骨架屏效果
+   ======================================== */
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius);
+}
+
+/* ========================================
+   地图容器样式
+   ======================================== */
+.mapDisplay,
+#container {
+  width: 100%;
+  height: 600px;
+  min-height: 600px;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-total {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .error-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .error-container .error-img {
+    width: 250px;
+  }
+}

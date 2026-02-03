@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python -c:*)",
+      "Bash(where:*)",
+      "Bash(python manage.py runserver:*)",
+      "Bash(\"E:\\\\software\\\\anaconda3\\\\python.exe\" -m pip install:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
