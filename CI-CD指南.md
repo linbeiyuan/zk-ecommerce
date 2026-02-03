@@ -201,7 +201,17 @@ zk电商平台/
 
 
 
+# CI的作用
+
 ~~~
+
+# 假设你重命名了文件
+git add .
+git commit -m "重命名文件"
+git push
+Git 会自动追踪文件的重命名和移动，推送后 GitHub 上的文件也会相应更新。
+
+
 传统方式的问题：
 
 每次修改代码后，需要手动测试
@@ -242,3 +252,50 @@ GitHub Actions 检测到新提交
 "每次我修改代码并 push 到 GitHub，GitHub Actions 会自动检测到新提交，然后自动运行我配置的 CI 工作流。它会自动测试后端代码、构建前后端项目，如果有错误会立即反馈给我。这样可以在开发阶段就发现问题，避免部署到生产环境后才发现错误。"
 ~~~
 
+~~~
+
+
+~~~
+
+# CD的作用
+
+~~~
+"CD 是持续部署。当 CI 测试通过后，CD 会自动构建 Docker 镜像并推送到 Docker Hub。在实际生产环境中，服务器会自动拉取新镜像并重启服务，实现自动化部署。这样可以快速上线新功能，减少人工操作，提高部署效率。"
+
+
+
+完整的 CI/CD 流程
+
+1. 你修改代码
+   ↓
+2. git push 到 GitHub
+   ↓
+3. CI 自动运行（测试、构建）
+   ↓
+4. CI 通过 ✅
+   ↓
+5. CD 自动触发
+   ↓
+6. 构建 Docker 镜像
+   ↓
+7. 推送到 Docker Hub
+   ↓
+8. 服务器自动拉取新镜像
+   ↓
+9. 自动重启服务
+   ↓
+10. 新版本上线 🎉
+
+~~~
+
+
+
+
+
+![image-20260204000918670](C:\Users\李圣杰\AppData\Roaming\Typora\typora-user-images\image-20260204000918670.png)
+
+![image-20260204001339919](C:\Users\李圣杰\AppData\Roaming\Typora\typora-user-images\image-20260204001339919.png)
+
+![image-20260204001621976](C:\Users\李圣杰\AppData\Roaming\Typora\typora-user-images\image-20260204001621976.png)
+
+![image-20260204002027153](C:\Users\李圣杰\AppData\Roaming\Typora\typora-user-images\image-20260204002027153.png)
