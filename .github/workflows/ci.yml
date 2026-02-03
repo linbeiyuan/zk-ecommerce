@@ -1,4 +1,5 @@
 # CI 持续集成工作流
+# 每次推送到 main 或 develop 分支时自动运行
 name: CI - 持续集成
 
 on:
