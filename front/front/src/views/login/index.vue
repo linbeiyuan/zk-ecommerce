@@ -20,8 +20,8 @@
           </label> -->
           <label class="flex items-center cursor-pointer" v-for="item in menus" type="radio">
         <span>
-    <input v-if="item.tableName!='users' && item.roleName!='游客' && && item.roleName!='商家'" type="radio" v-model="role" :value="item.roleName" class="w-4 h-4 text-blue-600">
-    <span v-if="item.tableName!='users' && item.roleName!='游客' && && item.roleName!='商家'" class="ml-2">{{item.roleName}}</span>
+    <input v-if="item.tableName!='users' && item.roleName!='游客' && item.roleName!='商家'" type="radio" v-model="role" :value="item.roleName" class="w-4 h-4 text-blue-600">
+    <span v-if="item.tableName!='users' && item.roleName!='游客' && item.roleName!='商家'" class="ml-2">{{item.roleName}}</span>
         </span>
           </label>
           <!-- <label class="flex items-center cursor-pointer">
