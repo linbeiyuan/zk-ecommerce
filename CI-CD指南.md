@@ -260,6 +260,10 @@ GitHub Actions 检测到新提交
 # CD的作用
 
 ~~~
+Docker Hub 配置:
+- 用户名: linbeiyuan
+- 令牌: 已配置在 GitHub Secrets 中
+
 "CD 是持续部署。当 CI 测试通过后，CD 会自动构建 Docker 镜像并推送到 Docker Hub。在实际生产环境中，服务器会自动拉取新镜像并重启服务，实现自动化部署。这样可以快速上线新功能，减少人工操作，提高部署效率。"
 
 
