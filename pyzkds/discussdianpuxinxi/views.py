@@ -196,10 +196,10 @@ def DiscussdianpuxinxiListPage(request):
 
 def DiscussdianpuxinxiListNotPage(request):
     userid = request.query_params.get('userid')
+    refid = request.query_params.get('refid')  # 获取店铺ID参数
     query_params = {
                         'id__icontains': request.query_params.get('id'),
                                 'addtime__icontains': request.query_params.get('addtime'),
-                                'refid__icontains': request.query_params.get('refid'),
                                                 'nickname__icontains': request.query_params.get('nickname'),
                                 'content__icontains': request.query_params.get('content'),
                                 'reply__icontains': request.query_params.get('reply'),
@@ -214,6 +214,9 @@ def DiscussdianpuxinxiListNotPage(request):
     if userid is not None:
         q_objects.add(Q(**{'userid': userid}), Q.AND)
 
+    # 如果传入店铺ID，只查询该店铺的评论
+    if refid is not None:
+        q_objects.add(Q(**{'refid': refid}), Q.AND)
 
     queryset = Discussdianpuxinxi.objects.filter(q_objects).all()
     count = Discussdianpuxinxi.objects.filter(q_objects).count()

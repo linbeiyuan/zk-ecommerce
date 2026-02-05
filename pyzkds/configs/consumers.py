@@ -56,8 +56,11 @@ class DoctorUserWebSocketConsumer(AsyncWebsocketConsumer):
             msg = data.get('msg')
 
             if target_user_id:
+                # 获取接收者昵称
+                receiver_nickname = await self.get_user_nickname(target_user_id)
+
                 # 保存消息到数据库
-                await self.save_message(src_user_id, src_user_nickname, target_user_id, msg)
+                await self.save_message(src_user_id, src_user_nickname, target_user_id, receiver_nickname, msg)
 
                 # 发送消息给目标用户
                 await self.send_message_to_user(target_user_id, {
@@ -69,16 +72,25 @@ class DoctorUserWebSocketConsumer(AsyncWebsocketConsumer):
                 })
 
     @database_sync_to_async
-    def save_message(self, sender_id, sender_name, receiver_id, message):
+    def save_message(self, sender_id, sender_name, receiver_id, receiver_name, message):
         # 保存消息到数据库
         Consultation.objects.create(
             sender=sender_id,
             sender_name=sender_name,
             receiver=receiver_id,
+            receiver_name=receiver_name,
             msg=message,
             send_time=timezone.now(),
             read_status=0
         )
+
+    async def get_user_nickname(self, user_id):
+        # 从会话字典中查找用户昵称
+        for role, user_sessions in self.role_session_map.items():
+            for (uid, nickname), session in user_sessions.items():
+                if uid == user_id:
+                    return nickname
+        return "未知用户"
 
     async def send_message_to_user(self, target_user_id, message):
         # 查找目标用户的会话并发送消息
@@ -86,7 +98,7 @@ class DoctorUserWebSocketConsumer(AsyncWebsocketConsumer):
             for (user_id, nickname), session in user_sessions.items():
                 if user_id == target_user_id:
                     await session.send(text_data=json.dumps(message))
-                    break
+                    return  # 找到目标用户后直接返回
 
 class LetterWebSocketConsumer(AsyncWebsocketConsumer):
     # 存储用户会话的字典

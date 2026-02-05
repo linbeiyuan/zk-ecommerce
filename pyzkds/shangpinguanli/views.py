@@ -475,3 +475,36 @@ def generate_unique_userid():
     userid = timestamp + random_part
     return userid
 
+
+# 销量统计 TOP10
+class SalesTop10(APIView):
+    def get(self, request):
+        try:
+            # 获取当前登录商家的用户ID
+            token = request.META.get('HTTP_TOKEN')
+            if not token:
+                return Response({'code': 401, 'msg': '未登录'})
+
+            # 解析token获取商家信息
+            payload = myjwt.jwt_decode(token)
+            shangjia_userid = payload.get('id')
+
+            # 查询该商家的所有商品
+            products = Shangpinguanli.objects.filter(
+                userid=shangjia_userid
+            ).values('id', 'shangpinmingcheng')[:10]
+
+            # 转换为列表（暂时返回模拟数据）
+            result = []
+            for product in products:
+                result.append({
+                    'id': product['id'],
+                    'shangpinmingcheng': product['shangpinmingcheng'],
+                    'sales': 0  # 暂时返回0，后续可以通过订单统计
+                })
+
+            return Response({'code': 0, 'data': result})
+        except Exception as e:
+            print(f"销量统计错误: {str(e)}")
+            return Response({'code': 500, 'msg': f'获取销量统计失败: {str(e)}'})
+

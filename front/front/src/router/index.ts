@@ -155,6 +155,28 @@ export const dynamicRoutes: RouteRecordRaw[] = [
 
                         ],
                     },
+
+                                                {
+                        path: "/letter",
+                        name: "letter",
+                        meta: {
+                            title: "我的消息",
+                            icon: "&#xe7fc;", // 图标
+                        },
+                        redirect:'/letter',
+                        children: [
+                            {
+                                path: "/letter",
+                                name: "letter",
+                                meta: {
+                                    title: "我的消息",
+                                    icon: "&#xe90f;", // 图标
+                                },
+                                component: () => import("@/views/letter/index.vue"),
+                            },
+
+                        ],
+                    },
                 
                             
                     

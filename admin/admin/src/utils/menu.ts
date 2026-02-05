@@ -56,13 +56,12 @@ const menu = {
             "menu": "店铺信息",
             "menuJump": "列表",
             "tableName": "dianpuxinxi"
-        }], "menu": "店铺信息"
-    },{"child": [{
-            "buttons":["新增","删除","修改","查看"],
-            "menu": "问诊",
+        },{
+            "buttons":["查看","回复"],
+            "menu": "联系",
             "menuJump": "列表",
-            "tableName": "wenzhen"
-        }], "menu": "问诊"
+            "tableName": "letter"
+        }], "menu": "店铺信息"
     },{
     "child": [{
         "buttons": ["查看", "删除"],
@@ -84,6 +83,10 @@ const menu = {
         "buttons": ["查看"],
         "menu": "已退款订单",
         "tableName": "orders/已退款"
+    }, {
+        "buttons": ["查看"],
+        "menu": "销量统计",
+        "tableName": "salesStatistics"
     }], "menu": "订单管理"
 }],"frontMenu":[{
                 "child": [{"buttons": ["查看"], "menu": "平台通知", "tableName": "news"}],

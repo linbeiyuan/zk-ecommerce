@@ -26,7 +26,11 @@ async function getpagelist(){
       method:'get'
     }).then((data)=>{
       state.tableList.length=0;
-      state.tableList=data.data.list;
+      // 修复图片URL中的端口号
+      state.tableList=data.data.list.map((item:any)=>({
+        ...item,
+        value: item.value?.replace(':8080', ':8000') || item.value
+      }));
     })
     nextTick(()=>{})
   } catch (error) {

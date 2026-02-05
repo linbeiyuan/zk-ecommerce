@@ -18,7 +18,7 @@ export const useSocketStore = defineStore('socket', {
 });
 
 function connectSocket(userId, nicheng, role) {
-    useSocketStore.socket = new WebSocket("ws://localhost:8080/pyzkds/consultation?role=" + role + "&userid=" + userId + "&nicheng=" + nicheng);
+    useSocketStore.socket = new WebSocket("ws://localhost:8000/pyzkds/consultation?role=" + role + "&userid=" + userId + "&nicheng=" + nicheng);
     useSocketStore.socket.onopen = () => {
         console.log('WebSocket连接已打开');
         useSocketStore.socket.send(JSON.stringify({ type: 'JOIN', userId: userId, role: role, nicheng: nicheng}));

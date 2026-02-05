@@ -49,7 +49,7 @@
     state.dataList = []
     state.im_users = []
     state.targetUserId = detail.userid
-    state.targetUserNicheng = detail.biaoti
+    state.targetUserNicheng = detail.nicheng || detail.biaoti || detail.dianpumingcheng
     getHistoryMsg();
     state.open = true;
   }

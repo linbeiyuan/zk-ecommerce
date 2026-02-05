@@ -197,10 +197,10 @@ def DiscussshangpinguanliListPage(request):
 
 def DiscussshangpinguanliListNotPage(request):
     userid = request.query_params.get('userid')
+    refid = request.query_params.get('refid')  # 获取商品ID参数
     query_params = {
                         'id__icontains': request.query_params.get('id'),
                                 'addtime__icontains': request.query_params.get('addtime'),
-                                'refid__icontains': request.query_params.get('refid'),
                                                 'nickname__icontains': request.query_params.get('nickname'),
                                 'content__icontains': request.query_params.get('content'),
                                 'reply__icontains': request.query_params.get('reply'),
@@ -215,6 +215,9 @@ def DiscussshangpinguanliListNotPage(request):
     if userid is not None:
         q_objects.add(Q(**{'userid': userid}), Q.AND)
 
+    # 如果传入商品ID，只查询该商品的评论
+    if refid is not None:
+        q_objects.add(Q(**{'refid': refid}), Q.AND)
 
     queryset = Discussshangpinguanli.objects.filter(q_objects).all()
     count = Discussshangpinguanli.objects.filter(q_objects).count()

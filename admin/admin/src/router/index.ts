@@ -137,6 +137,24 @@ export const dynamicRoutes: RouteRecordRaw[] = [
 
                         ],
                     },
+                    {
+                        path: "/salesStatistics",
+                        name: "salesStatistics",
+                        meta: {
+                            title: "销量统计",
+                            icon: "&#xe7fc;", // 图标
+                        },
+                        component: () => import("@/views/salesStatistics/index.vue"),
+                    },
+                    {
+                        path: "/letter",
+                        name: "letter",
+                        meta: {
+                            title: "联系",
+                            icon: "&#xe7fc;", // 图标
+                        },
+                        component: () => import("@/views/letter/list.vue"),
+                    },
 
 
                 

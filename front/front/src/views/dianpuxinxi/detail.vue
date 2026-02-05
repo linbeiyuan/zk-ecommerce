@@ -74,12 +74,12 @@
 
 
 
-            
-              <button @click="wd" class="detail-btn detail-btn-small detail-btn-collect">
-                <i class="fas fa-bookmark"></i>
-                <span>咨询</span>
+
+              <button @click="contactShop" class="detail-btn detail-btn-small detail-btn-collect">
+                <i class="fas fa-comment"></i>
+                <span>联系</span>
               </button>
-            
+
             
             
 
@@ -193,6 +193,50 @@
     <div id="container" class="mapDisplay"></div>
   </el-dialog>
 
+  <!-- 联系对话框 - 聊天窗口 -->
+  <el-dialog
+    :title="`与 ${detail.nicheng || detail.dianpumingcheng} 的对话`"
+    v-model="contactDialogVisible"
+    width="600px"
+    :close-on-click-modal="false"
+  >
+    <!-- 消息列表 -->
+    <div class="chat-messages" ref="chatMessagesRef">
+      <div
+        v-for="msg in chatMessages"
+        :key="msg.id"
+        :class="['chat-message', msg.isSelf ? 'self' : 'other']"
+      >
+        <div class="message-bubble">
+          <div class="message-text">{{ msg.msg }}</div>
+          <div class="message-time">{{ formatChatTime(msg.sendTime) }}</div>
+        </div>
+      </div>
+      <div v-if="chatMessages.length === 0" class="empty-chat">
+        <p>暂无消息，开始聊天吧~</p>
+      </div>
+    </div>
+
+    <!-- 发送消息区域 -->
+    <div class="chat-input-area">
+      <el-input
+        v-model="contactMessage"
+        type="textarea"
+        :rows="3"
+        placeholder="输入消息内容... (Ctrl+Enter 发送)"
+        @keydown.ctrl.enter="sendContactMessage"
+      ></el-input>
+      <div class="chat-actions">
+        <el-button @click="refreshChatMessages" size="small">
+          <i class="fas fa-sync-alt"></i> 刷新
+        </el-button>
+        <el-button type="primary" @click="sendContactMessage" :loading="sendingMessage">
+          发送
+        </el-button>
+      </div>
+    </div>
+  </el-dialog>
+
 
 
 <Wd ref="WdRef"></Wd>
@@ -233,11 +277,100 @@
     import iconTeam from '@/assets/1.png';
     import AMapLoader from '@amap/amap-jsapi-loader';
 
-    
+
         function wd() {
       WdRef.value.openaddOrupdate(state.detail);
     }
-    
+
+    // 联系商家
+    function contactShop() {
+      state.contactDialogVisible = true;
+      state.contactMessage = '';
+      state.chatMessages = [];
+      loadChatMessages();
+    }
+
+    // 加载聊天消息
+    async function loadChatMessages() {
+      if (!state.detail.userid) return;
+
+      try {
+        const res = await request({
+          url: 'letter/querySomeBodyMsg',
+          method: 'get',
+          params: { sender: state.detail.userid }
+        });
+
+        if (res.code === 0) {
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          state.chatMessages = res.data.map(msg => ({
+            ...msg,
+            isSelf: msg.sender === user.id
+          }));
+          scrollToBottom();
+        }
+      } catch (error) {
+        console.error('加载消息失败:', error);
+      }
+    }
+
+    // 发送联系消息
+    async function sendContactMessage() {
+      if (!state.contactMessage.trim()) {
+        notify('请输入消息内容', {type: 'warning'});
+        return;
+      }
+
+      state.sendingMessage = true;
+      try {
+        const res = await request({
+          url: 'letter/send',
+          method: 'post',
+          data: {
+            receiver: state.detail.userid,
+            receiverName: state.detail.nicheng || state.detail.dianpumingcheng,
+            msg: state.contactMessage
+          }
+        });
+
+        if (res.code === 0) {
+          notify('发送成功', {type: 'success'});
+          state.contactMessage = '';
+          // 重新加载消息列表
+          await loadChatMessages();
+        } else {
+          notify(res.msg || '发送失败', {type: 'error'});
+        }
+      } catch (error) {
+        console.error('发送失败:', error);
+        notify('发送失败', {type: 'error'});
+      } finally {
+        state.sendingMessage = false;
+      }
+    }
+
+    // 刷新聊天消息
+    function refreshChatMessages() {
+      loadChatMessages();
+    }
+
+    // 滚动到底部
+    function scrollToBottom() {
+      setTimeout(() => {
+        const chatBox = document.querySelector('.chat-messages');
+        if (chatBox) {
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      }, 100);
+    }
+
+    // 格式化聊天时间
+    function formatChatTime(time) {
+      if (!time) return '';
+      const date = new Date(time);
+      return `${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+    }
+
     
   // 打印
   const id=route.params.id
@@ -272,6 +405,11 @@
       content:""
     },
     detailFlag:false,
+    // 联系对话框相关
+    contactDialogVisible: false,
+    contactMessage: '',
+    chatMessages: [],
+    sendingMessage: false,
   })
 
 
@@ -282,6 +420,10 @@
       visibledw,
             detailTable,
     formData,
+    contactDialogVisible,
+    contactMessage,
+    chatMessages,
+    sendingMessage,
   } = {...toRefs(state)};
 
         
@@ -596,8 +738,80 @@
       state.visibledw=false;
     }
 
-    
-    
-    
+
+
+
 
 </script>
+
+<style scoped>
+/* 聊天窗口样式 */
+.chat-messages {
+  height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.chat-message {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.chat-message.self {
+  justify-content: flex-end;
+}
+
+.chat-message.self .message-bubble {
+  background-color: #409eff;
+  color: white;
+}
+
+.chat-message.other {
+  justify-content: flex-start;
+}
+
+.chat-message.other .message-bubble {
+  background-color: white;
+  color: #303133;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-text {
+  word-break: break-word;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.message-time {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.empty-chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #909399;
+}
+
+.chat-input-area {
+  margin-top: 10px;
+}
+
+.chat-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+</style>

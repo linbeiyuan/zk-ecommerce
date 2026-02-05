@@ -26,5 +26,6 @@ urlpatterns = [
     path('info/<int:id>', ShangpinguanliInfo.as_view()),  # 查询详情数据
     path('detail/<int:id>', ShangpinguanliInfo.as_view()),  # 帖子详情
     path('recommendList', Recommend.as_view()),  # 推荐
+    path('salesTop10', SalesTop10.as_view()),  # 销量统计TOP10
 
 ]
