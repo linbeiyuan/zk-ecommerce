@@ -174,7 +174,7 @@
   const captchaRotation = ref(0);
 
   const generateCaptcha = () => {
-    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
     let result = '';
     for (let i = 0; i < 4; i++) {
       result += chars[Math.floor(Math.random() * chars.length)];

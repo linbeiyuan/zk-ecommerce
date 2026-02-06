@@ -46,9 +46,17 @@
 
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <td colspan="3" style="text-align: right;">总价</td>
+                    <tr v-if="selectedCoupon">
+                        <td colspan="3" style="text-align: right;">商品总计</td>
                         <td>¥{{totalPrice}}</td>
+                    </tr>
+                    <tr v-if="selectedCoupon">
+                        <td colspan="3" style="text-align: right; color: #ff6b6b;">优惠券</td>
+                        <td style="color: #ff6b6b;">-¥{{selectedCoupon.discount_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold;">总价</td>
+                        <td style="font-weight: bold; color: #ff6b6b;">¥{{finalPrice}}</td>
                     </tr>
                     </tfoot>
                 </table>
@@ -84,10 +92,11 @@
         orderId:[],
         flag:true,
         orders:{},
-        totalPrice:0
+        totalPrice:0,
+        selectedCoupon:null
     });
 
-    const {open,user,dataList,addressList,ismo,value,address,orderId,flag,orders,totalPrice} = {...toRefs(state)};
+    const {open,user,dataList,addressList,ismo,value,address,orderId,flag,orders,totalPrice,selectedCoupon} = {...toRefs(state)};
 
 
     state.totalPrice=computed(()=>{
@@ -98,6 +107,14 @@
         state.total += item.price * item.buynumber
     }
     return state.total;
+    })
+
+    // 计算实付金额
+    const finalPrice = computed(() => {
+        if (state.selectedCoupon) {
+            return Math.max(0, state.totalPrice - state.selectedCoupon.discount_amount)
+        }
+        return state.totalPrice
     })
 
 
@@ -118,9 +135,10 @@
     });
 
 
-    function openordersinit(){
+    function openordersinit(coupon){
 
         state.open=true;
+        state.selectedCoupon = coupon;
         getlist();
         getaddress();
         state.orderId.splice(0, state.orderId.length);
@@ -217,12 +235,13 @@
                         buynumber: item.buynumber,
                         discountprice: item.price,
                         price: item.price,
-                        total: item.price * item.buynumber,
-                        discounttotal: item.price * item.buynumber,
+                        total: finalPrice.value,
+                        discounttotal: finalPrice.value,
                         type: 1,
-                        total: state.totalPrice,
                         address: state.address,
-                        status: '未支付'
+                        status: '未支付',
+                        coupon_id: state.selectedCoupon ? state.selectedCoupon.id : null,
+                        coupon_discount: state.selectedCoupon ? state.selectedCoupon.discount_amount : 0
                     }
 
                     //新增订单
@@ -232,6 +251,21 @@
                         data:state.orders
                     }).then((data) => {
                         if (data && data.code === 0) {
+
+                        // 如果使用了优惠券，更新优惠券状态
+                        if (state.selectedCoupon) {
+                            request({
+                                url: 'coupon/use',
+                                method: 'post',
+                                data: {
+                                    user_coupon_id: state.selectedCoupon.id,
+                                    orderid: state.orderId[index]
+                                }
+                            }).catch(err => {
+                                console.error('更新优惠券状态失败:', err)
+                            })
+                        }
+
                         console.log("余额"+state.user.money);
                         console.log("总价"+state.totalPrice);
                         if (state.user.money < state.totalPrice) {

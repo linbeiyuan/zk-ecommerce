@@ -480,6 +480,8 @@ def generate_unique_userid():
 class SalesTop10(APIView):
     def get(self, request):
         try:
+            from django.db.models import Sum
+
             # 获取当前登录商家的用户ID
             token = request.META.get('HTTP_TOKEN')
             if not token:
@@ -487,24 +489,40 @@ class SalesTop10(APIView):
 
             # 解析token获取商家信息
             payload = myjwt.jwt_decode(token)
-            shangjia_userid = payload.get('id')
+            # 兼容两种token格式
+            if 'data' in payload:
+                shangjia_userid = payload['data'].get('userid')
+            else:
+                shangjia_userid = payload.get('id')
 
             # 查询该商家的所有商品
             products = Shangpinguanli.objects.filter(
                 userid=shangjia_userid
-            ).values('id', 'shangpinmingcheng')[:10]
+            ).values('id', 'shangpinmingcheng')
 
-            # 转换为列表（暂时返回模拟数据）
+            # 统计每个商品的销量
             result = []
             for product in products:
+                # 统计该商品在已完成订单中的总销量
+                sales = Orders.objects.filter(
+                    goodid=product['id'],
+                    status='已完成'
+                ).aggregate(total_sales=Sum('buynumber'))['total_sales'] or 0
+
                 result.append({
                     'id': product['id'],
                     'shangpinmingcheng': product['shangpinmingcheng'],
-                    'sales': 0  # 暂时返回0，后续可以通过订单统计
+                    'sales': sales
                 })
+
+            # 按销量降序排序，取前10
+            result.sort(key=lambda x: x['sales'], reverse=True)
+            result = result[:10]
 
             return Response({'code': 0, 'data': result})
         except Exception as e:
             print(f"销量统计错误: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return Response({'code': 500, 'msg': f'获取销量统计失败: {str(e)}'})
 

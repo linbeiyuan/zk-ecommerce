@@ -88,7 +88,7 @@ function  register(tableName) {
       <!-- Logo - 顶部 -->
       <div>
         <i class="fas fa-mountain text-2xl" style="color: #ff6b35;"></i>
-        <span style="font-size: 18px; font-weight: 700; color: #ff6b35;">电商平台</span>
+        <span style="font-size: 18px; font-weight: 700; color: #ff6b35;">基于CI/CD的电商管理平台</span>
       </div>
 
       <!-- 菜单和按钮 - 同一行 -->
@@ -110,7 +110,8 @@ function  register(tableName) {
               <a @click="menuHandler(`home`)">首页</a>
               <a v-for="(menu, index1) in item.frontMenu" :key="index1" @click="menuHandler(menu.child[0]?.tableName)">{{ menu.menu }}</a>
               <a @click="menuHandler('grzx')">个人中心</a>
-                                          <a @click="gwc()">购物车</a>
+              <a @click="gwc()">购物车</a>
+              <a @click="menuHandler('aichat')">AI购物助手</a>
                           </div>
           </div>
         </div>

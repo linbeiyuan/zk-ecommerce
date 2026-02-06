@@ -170,7 +170,12 @@ const menu = {
 
 const geren={
     list(){
-        return [{"ykMenu":[],"roleName": "个人中心", "tableName": "个人中心"}]
+        return [{"ykMenu":[
+            {
+                "child": [{"buttons": ["查看"], "menu": "我的优惠券", "tableName": "coupon"}],
+                "menu": "我的优惠券"
+            }
+        ],"roleName": "个人中心", "tableName": "个人中心"}]
     }
 }
 export {

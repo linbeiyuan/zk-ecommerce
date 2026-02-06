@@ -29,21 +29,36 @@ export const dynamicRoutes: RouteRecordRaw[] = [
                     title: "个人信息",
                     icon: "&#xe7fc;", // 图标
                 },
-                redirect:'/grzx',
-                children: [
-                    {
-                        path: "/grzx",
-                        name: "grzx",
-                        meta: {
-                            title: "个人信息",
-                            icon: "&#xe90f;", // 图标
-                        },
-                        component: () => import("@/views/grzx/index.vue"),
-                    },
-
-                ],
+                component: () => import("@/views/grzx/index.vue"),
             },
-             
+            {
+                path: "/coupon",
+                name: "coupon",
+                meta: {
+                    title: "我的优惠券",
+                    icon: "&#xe65e;",
+                },
+                component: () => import("@/views/coupon/index.vue"),
+            },
+            {
+                path: "/coupon-receive",
+                name: "coupon-receive",
+                meta: {
+                    title: "优惠券领取中心",
+                    icon: "&#xe65e;",
+                },
+                component: () => import("@/views/coupon/receive.vue"),
+            },
+            {
+                path: "/aichat",
+                name: "aichat",
+                meta: {
+                    title: "AI购物助手",
+                    icon: "&#xe7fc;",
+                },
+                component: () => import("@/views/aichat/index.vue"),
+            },
+
             {
                 path: "/forum",
                 name: "forum",

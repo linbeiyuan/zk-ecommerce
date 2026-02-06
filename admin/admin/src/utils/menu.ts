@@ -177,7 +177,15 @@ const menu = {
                     "menu": "已发货订单",
                     "tableName": "orders/已发货"
                 }], "menu": "订单管理"
-            },{"child":[{
+            },{
+    "child": [{
+        "buttons": ["新增", "查看", "删除"],
+        "menu": "优惠券管理",
+        "menuJump": "列表",
+        "tableName": "coupon"
+    }],
+    "menu": "优惠券管理"
+},{"child":[{
             "buttons": ["新增", "查看", "修改", "删除"],
             "menu": "轮播图管理",
             "tableName": "config"

@@ -209,6 +209,29 @@
         </div>
       </div>
     </section>
+
+    <!-- 优惠券专区 -->
+    <section class="coupon-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">优惠券专区</h2>
+          <p class="section-desc">领取优惠券，享受更多优惠</p>
+        </div>
+        <div class="coupon-banner">
+          <div class="coupon-content">
+            
+            <div class="coupon-text">
+              <h3>新人专享优惠券</h3>
+              <p>多种优惠券等你来领，购物更省钱</p>
+            </div>
+          </div>
+          <router-link to="/coupon-receive" class="coupon-btn">
+            立即领取
+          </router-link>
+        </div>
+      </div>
+    </section>
+
     <!-- 产品展示 -->
     <section class="products-section">
       <div class="section-container">
@@ -417,5 +440,72 @@
 </template>
 
 <style scoped>
-/* 所有样式都在全局CSS文件中定义 */
+/* 优惠券专区样式 */
+.coupon-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+}
+
+.coupon-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
+  transition: transform 0.3s;
+}
+
+.coupon-banner:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(255, 107, 107, 0.4);
+}
+
+.coupon-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.coupon-icon {
+  font-size: 64px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.coupon-text h3 {
+  font-size: 28px;
+  color: white;
+  margin: 0 0 8px 0;
+  font-weight: bold;
+}
+
+.coupon-text p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.coupon-btn {
+  background: white;
+  color: #ff6b6b;
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-btn:hover {
+  background: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
 </style>

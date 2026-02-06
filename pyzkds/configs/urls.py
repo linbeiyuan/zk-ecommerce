@@ -41,7 +41,9 @@ urlpatterns = [
     path('pyzkds/file/', include('file.urls')),
     path('pyzkds/', include('common.urls')),
     path('pyzkds/consultation/', include('consultation.urls')),
-    path('pyzkds/letter/', include('letter.urls'))
+    path('pyzkds/letter/', include('letter.urls')),
+    path('pyzkds/coupon/', include('coupon.urls')),
+    path('pyzkds/aichat/', include('aichat.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

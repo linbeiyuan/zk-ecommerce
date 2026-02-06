@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'common',
     'consultation',
     'letter',
+    'coupon',
+    'aichat',
     'channels'
 ]
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'

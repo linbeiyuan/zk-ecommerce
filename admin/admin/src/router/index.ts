@@ -151,9 +151,18 @@ export const dynamicRoutes: RouteRecordRaw[] = [
                         name: "letter",
                         meta: {
                             title: "联系",
-                            icon: "&#xe7fc;", // 图标
+                            icon: "&#xe7fc;",
                         },
                         component: () => import("@/views/letter/list.vue"),
+                    },
+                    {
+                        path: "/coupon",
+                        name: "coupon",
+                        meta: {
+                            title: "优惠券管理",
+                            icon: "&#xe65e;",
+                        },
+                        component: () => import("@/views/coupon/index.vue"),
                     },
 
 

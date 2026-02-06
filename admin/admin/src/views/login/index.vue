@@ -156,7 +156,7 @@ const captchaRef = ref<HTMLDivElement | null>(null);
 const captchaCode = ref('');
 const captchaError = ref(false);
 const getRandomChar = () => {
-  const chars = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZ';
+  const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
   return chars[Math.floor(Math.random() * chars.length)];
 };
 const getRandomColor = () => {

@@ -148,7 +148,10 @@ class AddressList(APIView):
             return AddressListPage(request)
 
 def AddressListPage(request):
-    userid = request.query_params.get('userid')
+    # 从JWT token获取当前登录用户ID
+    token = request.META.get('HTTP_TOKEN', 'No token provided')
+    userid = myjwt.jwt_decode(token)['data']['userid']
+
     page = request.query_params.get('page')  # 第几页
     limit = request.query_params.get('limit')  # 数量
     sort = request.query_params.get('sort') # 排序
@@ -168,8 +171,8 @@ def AddressListPage(request):
             value = value[1: -1]
             q_objects.add(Q(**{key: value}), Q.AND)
 
-    if userid is not None:
-        q_objects.add(Q(**{'userid': userid}), Q.AND)
+    # 强制过滤当前用户的地址
+    q_objects.add(Q(**{'userid': userid}), Q.AND)
 
 
     queryset = Address.objects.filter(q_objects).all()
@@ -190,7 +193,10 @@ def AddressListPage(request):
     return Response({'code': 0, 'data': {'list': result.data, 'total': count}})
 
 def AddressListNotPage(request):
-    userid = request.query_params.get('userid')
+    # 从JWT token获取当前登录用户ID
+    token = request.META.get('HTTP_TOKEN', 'No token provided')
+    userid = myjwt.jwt_decode(token)['data']['userid']
+
     query_params = {
                         'id__icontains': request.query_params.get('id'),
                                 'addtime__icontains': request.query_params.get('addtime'),
@@ -206,8 +212,8 @@ def AddressListNotPage(request):
             value = value[1: -1]
             q_objects.add(Q(**{key: value}), Q.AND)
 
-    if userid is not None:
-        q_objects.add(Q(**{'userid': userid}), Q.AND)
+    # 强制过滤当前用户的地址
+    q_objects.add(Q(**{'userid': userid}), Q.AND)
 
 
     queryset = Address.objects.filter(q_objects).all()
@@ -299,7 +305,10 @@ class AddressPage(APIView):
 # 默认地址
 class DefaultAddressInfo(APIView):
     def get(self, request):
-        userid = request.query_params.get('userid')
+        # 从JWT token获取当前登录用户ID
+        token = request.META.get('HTTP_TOKEN', 'No token provided')
+        userid = myjwt.jwt_decode(token)['data']['userid']
+
         entity = Address.objects.filter(userid=int(userid), isdefault='是').all()
         entityser = AddressSer(entity, many=True)
         return Response({'code': 0, 'data': entityser.data[0]})

@@ -528,7 +528,12 @@
 function handleClick(tab:any){
     console.log(tab.props.name)
     if(tab.props.name){
-        router.push(`/${tab.props.name}list`)
+        // 特殊处理优惠券路由
+        if(tab.props.name === 'coupon') {
+            router.push('/coupon')
+        } else {
+            router.push(`/${tab.props.name}list`)
+        }
     }
 }
 

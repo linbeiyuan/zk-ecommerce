@@ -46,13 +46,18 @@ class Page(APIView):
                 limit = 10
         except Exception as e:
             limit = 10
+
+        # 获取当前登录用户ID
+        token = request.META.get('HTTP_TOKEN', 'No token provided')
+        userid = myjwt.jwt_decode(token)['data']['userid']
+
         title = request.query_params.get('title')
         if title:
-            queryset = Forum.objects.filter(title__icontains=title[1:-1]).all()
-            count = Forum.objects.filter(title__icontains=title[1:-1]).count()
+            queryset = Forum.objects.filter(userid=userid, title__icontains=title[1:-1]).all()
+            count = Forum.objects.filter(userid=userid, title__icontains=title[1:-1]).count()
         else:
-            queryset = Forum.objects.all()
-            count = Forum.objects.count()
+            queryset = Forum.objects.filter(userid=userid).all()
+            count = Forum.objects.filter(userid=userid).count()
         # print(queryset)
         # 第二步：创建分页器，每页10条数据
         paginator = Paginator(queryset, limit)
@@ -76,13 +81,18 @@ class Page(APIView):
                 limit = 10
         except Exception as e:
             limit = 10
+
+        # 获取当前登录用户ID
+        token = request.META.get('HTTP_TOKEN', 'No token provided')
+        userid = myjwt.jwt_decode(token)['data']['userid']
+
         title = request.query_params.get('title')
         if title:
-            queryset = Forum.objects.filter(title__icontains=title[1:-1]).all()
-            count = Forum.objects.filter(title__icontains=title[1:-1]).count()
+            queryset = Forum.objects.filter(userid=userid, title__icontains=title[1:-1]).all()
+            count = Forum.objects.filter(userid=userid, title__icontains=title[1:-1]).count()
         else:
-            queryset = Forum.objects.all()
-            count = Forum.objects.count()
+            queryset = Forum.objects.filter(userid=userid).all()
+            count = Forum.objects.filter(userid=userid).count()
         # print(queryset)
         # 第二步：创建分页器，每页10条数据
         paginator = Paginator(queryset, limit)
