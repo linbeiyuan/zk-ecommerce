@@ -133,11 +133,11 @@ CHANNEL_LAYERS = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",  # ORM的底层对接pymysql的核心引擎类
-        "NAME": "pyzkds",  # 数据库名
-        "PORT": 3306,  # 端口
-        "HOST": "127.0.0.1",  # 数据库IP
-        "USER": "root",  # 账号
-        "PASSWORD": "123456",  # 密码
+        "NAME": os.environ.get("DB_NAME", "pyzkds"),  # 数据库名
+        "PORT": int(os.environ.get("DB_PORT", 3306)),  # 端口
+        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),  # 数据库IP（Docker中使用服务名，本地使用127.0.0.1）
+        "USER": os.environ.get("DB_USER", "root"),  # 账号
+        "PASSWORD": os.environ.get("DB_PASSWORD", "123456"),  # 密码
         "POOL_OPTIONS": {  # pool表示数据库连接池配置，主要为了节省连接数据库的开销，临时存储数据库连接对象
             "POOL_SIZE": 10,  # 默认情况下，打开的数据库连接对象的数量 [1,2,3,4,5,6,7,8,9,10]
             "MAX_OVERFLOW": 11,  # 负载情况下，允许溢出的连接数量  [11,12,13,14,15,16,17,18,19,20]

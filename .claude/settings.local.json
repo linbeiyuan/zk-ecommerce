@@ -19,7 +19,10 @@
       "Bash(python manage.py migrate:*)",
       "Bash(del:*)",
       "Bash(python manage.py startapp:*)",
-      "Bash(python manage.py dbshell:*)"
+      "Bash(python manage.py dbshell:*)",
+      "Bash(docker-compose ps:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker exec:*)"
     ]
   }
 }

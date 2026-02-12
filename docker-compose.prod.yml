@@ -21,17 +21,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: always
 
-  # 后端服务
+  # 后端服务（使用 CI/CD 构建的镜像）
   backend:
-    build: ./pyzkds
+    image: ${DOCKER_USERNAME}/zk-backend:latest
     container_name: zk-backend
     ports:
       - "8000:8000"
-    volumes:
-      - ./pyzkds:/app
     environment:
-      - DEBUG=1
+      - DEBUG=0
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_NAME=pyzkds
@@ -42,10 +41,11 @@ services:
         condition: service_healthy
     networks:
       - zk-network
+    restart: always
 
-  # 管理后台前端
+  # 管理后台前端（使用 CI/CD 构建的镜像）
   admin:
-    build: ./admin/admin
+    image: ${DOCKER_USERNAME}/zk-admin:latest
     container_name: zk-admin
     ports:
       - "8080:80"
@@ -53,10 +53,11 @@ services:
       - backend
     networks:
       - zk-network
+    restart: always
 
-  # 用户前台
+  # 用户前台（使用 CI/CD 构建的镜像）
   front:
-    build: ./front/front
+    image: ${DOCKER_USERNAME}/zk-front:latest
     container_name: zk-front
     ports:
       - "8081:80"
@@ -64,6 +65,7 @@ services:
       - backend
     networks:
       - zk-network
+    restart: always
 
 networks:
   zk-network:

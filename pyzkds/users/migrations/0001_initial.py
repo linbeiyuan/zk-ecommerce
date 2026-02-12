@@ -12,19 +12,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ChatHistory',
+            name='Users',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('userid', models.BigIntegerField(verbose_name='用户ID')),
-                ('question', models.TextField(verbose_name='用户问题')),
-                ('answer', models.TextField(verbose_name='AI回答')),
+                ('username', models.CharField(max_length=100, null=True, verbose_name='管理员用户名')),
+                ('password', models.CharField(max_length=100, null=True, verbose_name='管理员密码')),
+                ('role', models.CharField(default='管理员', max_length=100, null=True, verbose_name='角色')),
                 ('addtime', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
             ],
             options={
-                'verbose_name': 'AI聊天历史',
-                'verbose_name_plural': 'AI聊天历史',
-                'db_table': 'chat_history',
-                'ordering': ['-addtime'],
+                'db_table': 'users',
             },
         ),
     ]
