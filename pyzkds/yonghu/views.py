@@ -401,16 +401,29 @@ class Register(APIView):
         yonghuming=data.get('yonghuming')
         mima=data.get('mima')
         shoujihao=data.get('shoujihao')
+        code=data.get('code')  # 验证码
         dizhi=data.get('dizhi', '')  # 默认空字符串
         jf=data.get('jf', 0)  # 默认积分为0
-        if not all([
-            yonghuming,
-            mima,
-            shoujihao,
-        ]):
+
+        # 参数校验
+        if not all([yonghuming, mima, shoujihao, code]):
             return Response({"code": 401, 'msg': '参数不全'})
 
+        # 验证码校验
+        from sms.service import verify_sms_code
+        verify_result = verify_sms_code(shoujihao, code)
+        if not verify_result['success']:
+            return Response({"code": 401, 'msg': verify_result['message']})
 
+        # 检查用户名是否已存在
+        if Yonghu.objects.filter(yonghuming=yonghuming).exists():
+            return Response({"code": 401, 'msg': '用户名已存在'})
+
+        # 检查手机号是否已注册（已注释，允许同一手机号注册多个账号）
+        # if Yonghu.objects.filter(shoujihao=shoujihao).exists():
+        #     return Response({"code": 401, 'msg': '手机号已注册'})
+
+        # 创建用户
         Yonghu.objects.create(
             id=generate_unique_userid(),
             yonghuming=yonghuming,

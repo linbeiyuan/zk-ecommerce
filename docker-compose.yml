@@ -22,6 +22,18 @@ services:
       timeout: 5s
       retries: 5
 
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: zk-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - zk-network
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+
   # 后端服务
   backend:
     build: ./pyzkds
@@ -37,6 +49,9 @@ services:
       - DB_NAME=pyzkds
       - DB_USER=root
       - DB_PASSWORD=123456
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ENABLE_REAL_SMS=true
     depends_on:
       mysql:
         condition: service_healthy
@@ -71,3 +86,4 @@ networks:
 
 volumes:
   mysql-data:
+  redis-data:

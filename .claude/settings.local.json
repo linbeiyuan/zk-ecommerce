@@ -22,7 +22,9 @@
       "Bash(python manage.py dbshell:*)",
       "Bash(docker-compose ps:*)",
       "Bash(docker-compose logs:*)",
-      "Bash(docker exec:*)"
+      "Bash(docker exec:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(docker-compose up:*)"
     ]
   }
 }
