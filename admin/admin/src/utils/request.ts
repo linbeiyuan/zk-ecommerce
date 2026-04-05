@@ -10,7 +10,7 @@ const request: AxiosInstance = axios.create({
     // 基础url，复制easymock创建的服务接口基础路径，发送每个接口，都会带上这个url
     //baseURL: 'https://mock.mengxuegu.com/mock/64fa8039e70b8004a69ea036/mxg-vue3-elementplus',
     // baseURL: '/dev-api',
-    baseURL: import.meta.env.VITE_APP_BASE_API as string,
+    baseURL: import.meta.env.VITE_APP_BASE_API || import.meta.env.VITE_APP_SERVICE_URL,
     timeout: 20000,
 });
 

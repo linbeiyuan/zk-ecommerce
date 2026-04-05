@@ -75,7 +75,7 @@ function handleMouseLeave() {
   <header class="fixed top-0 left-0 right-0 h-16 shadow-md z-50 flex items-center justify-between px-6 animated-gradient">
     <div class="flex items-center">
      
-      <h1 class="text-xl text-white font-medium">基于CI/CD的电商管理平台</h1>
+      <h1 class="text-xl text-white font-medium">基于CI/CD的电商平台</h1>
     </div>
     <div class="flex items-center">
       <span style="margin-right: 20px; color: white;">{{ Session.get("role") }} : {{ Session.get("adminName") }}</span>

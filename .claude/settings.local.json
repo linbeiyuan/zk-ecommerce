@@ -24,7 +24,8 @@
       "Bash(docker-compose logs:*)",
       "Bash(docker exec:*)",
       "Bash(docker-compose restart:*)",
-      "Bash(docker-compose up:*)"
+      "Bash(docker-compose up:*)",
+      "Bash(docker-compose down:*)"
     ]
   }
 }

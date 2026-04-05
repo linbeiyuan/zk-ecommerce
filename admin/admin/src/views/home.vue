@@ -126,10 +126,10 @@ const backgroundStyle = computed(() => {
   <div ref="containerRef" class="home-container" :style="backgroundStyle">
     <canvas ref="canvasRef" class="particles-canvas"></canvas>
     <div class="content-wrapper" :style="cardTransformStyle">
-      <h1 class="title">基于CI/CD的电商管理平台</h1>
+      <h1 class="title">基于CI/CD的电商平台</h1>
       <p class="subtitle">高效管理，智慧经营，助力商家腾飞。</p>
       <p class="details">
-        欢迎使用电商管理平台！在这里，您可以轻松管理店铺信息、商品库存、订单处理和用户评论。我们致力于为商家提供便捷高效的一站式电商管理解决方案，让您专注于业务增长，实现销售目标。开启您的智慧电商之旅吧！
+        欢迎使用电商平台！在这里，您可以轻松管理店铺信息、商品库存、订单处理和用户评论。我们致力于为商家提供便捷高效的一站式电商管理解决方案，让您专注于业务增长，实现销售目标。开启您的智慧电商之旅吧！
       </p>
     </div>
   </div>

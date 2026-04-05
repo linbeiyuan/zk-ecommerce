@@ -6,6 +6,10 @@ import django
 # 必须先设置Django环境变量
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'configs.settings')
 
+# 跳过 MySQL 版本检查，兼容 MySQL 5.7
+from django.db.backends.base.base import BaseDatabaseWrapper
+BaseDatabaseWrapper.check_database_version_supported = lambda self: None
+
 # 初始化Django
 django.setup()
 

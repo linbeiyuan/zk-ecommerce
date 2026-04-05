@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hv(@5b5_6wc)^7jq5n)=cfqari$bitn&6=by^nq8y7m+0+v#3d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -138,10 +138,11 @@ DATABASES = {
         "HOST": os.environ.get("DB_HOST", "127.0.0.1"),  # 数据库IP（Docker中使用服务名，本地使用127.0.0.1）
         "USER": os.environ.get("DB_USER", "root"),  # 账号
         "PASSWORD": os.environ.get("DB_PASSWORD", "123456"),  # 密码
-        "POOL_OPTIONS": {  # pool表示数据库连接池配置，主要为了节省连接数据库的开销，临时存储数据库连接对象
-            "POOL_SIZE": 10,  # 默认情况下，打开的数据库连接对象的数量 [1,2,3,4,5,6,7,8,9,10]
-            "MAX_OVERFLOW": 11,  # 负载情况下，允许溢出的连接数量  [11,12,13,14,15,16,17,18,19,20]
+        "POOL_OPTIONS": {
+            "POOL_SIZE": 10,
+            "MAX_OVERFLOW": 11,
         },
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 }
 
@@ -184,10 +185,10 @@ USE_TZ = False
 # STATIC_URL = 'static/'
 import os
 #
-# MEDIA_URL = '/media/upload/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/upload')
+MEDIA_URL = '/pyzkds/upload/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/upload')
 
-STATIC_URL = '/pyzkds/upload/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'media/upload/'),  # 如果有额外的静态文件目录
 ]

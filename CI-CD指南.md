@@ -57,6 +57,8 @@
 3. **Node.js 18+** - 前端开发
 4. **Python 3.9+** - 后端开发
 
+# daphne -b 0.0.0.0 -p 8000 configs.asgi:application
+
 ### 安装 Docker (Windows)
 
 1. 下载 Docker Desktop: https://www.docker.com/products/docker-desktop

@@ -88,7 +88,7 @@ function  register(tableName) {
       <!-- Logo - 顶部 -->
       <div>
         <i class="fas fa-mountain text-2xl" style="color: #ff6b35;"></i>
-        <span style="font-size: 18px; font-weight: 700; color: #ff6b35;">基于CI/CD的电商管理平台</span>
+        <span style="font-size: 18px; font-weight: 700; color: #ff6b35;">基于CI/CD的电商平台</span>
       </div>
 
       <!-- 菜单和按钮 - 同一行 -->

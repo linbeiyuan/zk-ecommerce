@@ -27,10 +27,10 @@ export default defineConfig(({mode}) => {
         [env.VITE_APP_BASE_API]: {  // key是变量要加中括号[]
           // 代理后的目标地址
           //target: 'https://mock.mengxuegu.com/mock/64fa8039e70b8004a69ea036/mxg-vue3-elementplus',
-          target: env.VITE_APP_SERVICE_URL,
+          target: env.VITE_APP_SERVICE_URL || 'http://127.0.0.1:8000',
           // /dev-api/test 去除/dev-api，变成/test 最终变成https://mock.mengxuegu.com/mock/64fa8039e70b8004a69ea036/mxg-vue3-elementplus/test
           //rewrite: (path) => path.replace(/^\/dev-api/, ''),
-          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}/`), ''),
+          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), ''),
           // 开启代理
           changeOrigin: true,
         }

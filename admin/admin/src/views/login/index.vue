@@ -10,7 +10,7 @@
 
       <div class="container">
         <div class="form">
-          <h2>电商平台管理系统</h2>
+          <h2>基于CI/CD的电商平台系统</h2>
           <form @submit.prevent="handleSubmit">
             <div class="inputBx">
               <input type="text" required v-model="loginData.username">

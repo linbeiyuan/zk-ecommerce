@@ -18,7 +18,7 @@ class Upload(APIView):
             # 生成唯一的文件名（使用 UUID）
             random_filename = f"{uuid.uuid4()}{file_ext}"
             # 定义文件存储路径
-            file_path = os.path.join(settings.MEDIA_ROOT, 'media/upload/', random_filename)
+            file_path = os.path.join(settings.MEDIA_ROOT, random_filename)
             print('图片地址', file_path)
             # 确保存储目录存在
             if not os.path.exists(os.path.dirname(file_path)):
