@@ -3,9 +3,11 @@ $env:ENABLE_REAL_SMS="true"; daphne -b 0.0.0.0 -p 8000 configs.asgi:application
 
 
 docker运行
+必须先打开docker desktop
 docker-compose up -d
 docker-compose ps
 
 阿里云服务器启动
 docker-compose exec redis
 docker-compose up -d --build
+docker-compose ps
